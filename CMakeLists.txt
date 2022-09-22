@@ -17,7 +17,14 @@ endif()
 
 # find dependencies
 find_package(ament_cmake_auto REQUIRED)
-ament_auto_find_build_dependencies()
+find_package(rclcpp REQUIRED)
+find_package(rclcpp_lifecycle REQUIRED)
+find_package(tf2_ros REQUIRED)
+find_package(realtime_tools REQUIRED)
+find_package(nav_msgs REQUIRED)
+find_package(std_srvs REQUIRED)
+find_package(canopen_interfaces REQUIRED)
+find_package(realtime_tools REQUIRED)
 
 ament_auto_add_executable(
   diff_drive_node
@@ -25,6 +32,8 @@ ament_auto_add_executable(
   src/odometry.cpp
   src/speed_limiter.cpp
 )
+
+ament_target_dependencies(diff_drive_node rclcpp rclcpp_lifecycle realtime_tools tf2_ros nav_msgs std_srvs canopen_interfaces realtime_tools)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
